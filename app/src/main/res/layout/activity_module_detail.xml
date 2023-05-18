@@ -9,5 +9,10 @@
         android:id="@+id/textViewDisplay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    
+
+    <Button
+        android:id="@+id/buttonReturn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Return to Main Menu" />
 </LinearLayout>
