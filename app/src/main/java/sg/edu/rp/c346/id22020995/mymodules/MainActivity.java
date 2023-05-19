@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView tvSummary;
@@ -23,12 +25,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Module C203 = new Module("C203","Web AppIn Development",2023,1,4,"W65D");
-        Module C206 = new Module("C206","Software Development Process",2023,1,4,"W65D");
-        Module C218 = new Module("C218", "UI/UX Design for Apps", 2023,1,4,"W65D");
-        Module C235 = new Module("C235", "IT Security and Management",2023,1,4,"W65D");
-        Module C346 = new Module("C346","Android Programming",2023,1,4,"E63A");
-        Module G953 = new Module("G953","Life Skills III",2023,1,1,"HBL");
+        ArrayList<Module> moduleList = new ArrayList<Module>();
+        moduleList.add(new Module("C203","Web AppIn Development",2023,1,4,"W65D"));
+        moduleList.add(new Module("C206","Software Development Process",2023,1,4,"W65D"));
+        moduleList.add( new Module("C218", "UI/UX Design for Apps", 2023,1,4,"W65D"));
+        moduleList.add(new Module("C235", "IT Security and Management",2023,1,4,"W65D"));
+        moduleList.add(new Module("C346","Android Programming",2023,1,4,"E63A"));
+        moduleList.add(new Module("G953","Life Skills III",2023,1,1,"HBL"));
 
         tvSummary = findViewById(R.id.textViewSummary);
         tvC203 = findViewById(R.id.textViewC203);
@@ -39,9 +42,12 @@ public class MainActivity extends AppCompatActivity {
         tvG953 = findViewById(R.id.textViewG953);
 
 
-        int totalCredit = C203.getCredit()+ C206.getCredit()+ C218.getCredit()+ C235.getCredit()+C346.getCredit()+ G953.getCredit();
+        int totalCredit = 0;
+        for (int i = 0;i < moduleList.size();i++){
+            totalCredit = totalCredit+moduleList.get(i).getCredit();
+        }
         String summary = String.format("Academic Year: %d \nSemester: %d \nTotal Modular Credits: %d \nModules: ",
-                C203.getYear(),C203.getSemester(),totalCredit);
+                moduleList.get(0).getYear(),moduleList.get(0).getSemester(),totalCredit);
         tvSummary.setText(summary);
 
         tvC203.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i("MainActivity","tvC203 onClick() called");
                 Intent intent = new Intent(MainActivity.this, ModuleDetailActivity.class);
-                intent.putExtra("module","C203");
+                intent.putExtra("module",moduleList.get(0).getCode());
                 startActivity(intent);
             }
         });
@@ -58,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i("MainActivity","tvC206 onClick() called");
                 Intent intent = new Intent(MainActivity.this, ModuleDetailActivity.class);
-                intent.putExtra("module","C206");
+                intent.putExtra("module",moduleList.get(1).getCode());
                 startActivity(intent);
             }
         });
@@ -67,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i("MainActivity","tvC218 onClick() called");
                 Intent intent = new Intent(MainActivity.this, ModuleDetailActivity.class);
-                intent.putExtra("module","C218");
+                intent.putExtra("module",moduleList.get(2).getCode());
                 startActivity(intent);
             }
         });
@@ -76,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i("MainActivity","tvC235 onClick() called");
                 Intent intent = new Intent(MainActivity.this, ModuleDetailActivity.class);
-                intent.putExtra("module","C235");
+                intent.putExtra("module",moduleList.get(3).getCode());
                 startActivity(intent);
             }
         });
@@ -85,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i("MainActivity","tvC346 onClick() called");
                 Intent intent = new Intent(MainActivity.this, ModuleDetailActivity.class);
-                intent.putExtra("module","C346");
+                intent.putExtra("module",moduleList.get(4).getCode());
                 startActivity(intent);
             }
         });
@@ -94,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i("MainActivity","tvG953 onClick() called");
                 Intent intent = new Intent(MainActivity.this, ModuleDetailActivity.class);
-                intent.putExtra("module","G953");
+                intent.putExtra("module",moduleList.get(5).getCode());
                 startActivity(intent);
             }
         });
